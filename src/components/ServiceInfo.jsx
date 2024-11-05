@@ -35,7 +35,11 @@ const ServiceInfo = ({ data }) => {
     remainingTraffic: "",
   });
 
-  const statusMapping = {
+  // Determine API type
+  const isMarzban = data?.status !== undefined;
+
+  // Define status mapping for both API types
+  const statusMappingMarzbanApi = {
     on_hold: { color: "yellow", detail: "در انتظار اتصال" },
     expired: { color: "orange", detail: "منقضی شده" },
     limited: { color: "brown", detail: "محدود شده" },
@@ -43,7 +47,25 @@ const ServiceInfo = ({ data }) => {
     default: { color: "red", detail: "غیرفعال" },
   };
 
-  const currentStatus = statusMapping[data?.status] || statusMapping.default;
+  const statusMappingMarzneshinApi = {
+    expired: { color: "orange", detail: "منقضی شده" },
+    data_limit_reached: { color: "brown", detail: "حجم تمام شده" },
+    inactive: { color: "red", detail: "غیرفعال" },
+    active: { color: "green", detail: "فعال" },
+    limited: { color: "yellow", detail: "محدود شده" },
+    default: { color: "gray", detail: "نامشخص" },
+  };
+
+  // Determine status and status detail based on API type
+  const currentStatus = isMarzban
+    ? statusMappingMarzbanApi[data?.status] || statusMappingMarzbanApi.default
+    : data?.expired
+    ? statusMappingMarzneshinApi.expired
+    : data?.data_limit_reached
+    ? statusMappingMarzneshinApi.data_limit_reached
+    : data?.is_active
+    ? statusMappingMarzneshinApi.active
+    : statusMappingMarzneshinApi.inactive; // Fallback to inactive or default
 
   const statusColor = currentStatus.color;
   const statusDetail = currentStatus.detail;
@@ -54,45 +76,80 @@ const ServiceInfo = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      const {
-        online_at: onlineAt,
-        created_at: createdAt,
-        expire,
-        used_traffic: usedTraffic,
-        data_limit: dataLimit,
-      } = data;
+      if (isMarzban) {
+        const {
+          online_at: onlineAt,
+          created_at: createdAt,
+          expire,
+          used_traffic: usedTraffic,
+          data_limit: dataLimit,
+        } = data;
 
-      setServiceInfo({
-        formattedDate: onlineAt ? formatDate(onlineAt) : "نامشخص",
-        createdDate: createdAt ? formatDate(createdAt) : "نامشخص",
-        formattedExpireDate: expire ? formatExpireDate(expire) : "نامحدود",
-        remainingTime: expire ? (
-          calculateRemainingTime(expire)
-        ) : (
-          <FontAwesomeIcon size="lg" icon={faInfinity} />
-        ),
-        formattedTraffic:
-          usedTraffic !== 0 ? formatTraffic(usedTraffic) : "0 MB",
-        totalTraffic: dataLimit !== null ? formatTraffic(dataLimit) : "نامحدود",
-        remainingTraffic:
-          dataLimit !== null && dataLimit !== undefined ? (
-            dataLimit - (usedTraffic ?? 0) < 0 ? (
-              "منفی"
-            ) : (
-              formatTraffic(dataLimit - (usedTraffic ?? 0))
-            )
+        setServiceInfo({
+          formattedDate: onlineAt ? formatDate(onlineAt) : "نامشخص",
+          createdDate: createdAt ? formatDate(createdAt) : "نامشخص",
+          formattedExpireDate: expire ? formatExpireDate(expire) : "نامحدود",
+          remainingTime: expire ? (
+            calculateRemainingTime(expire)
           ) : (
             <FontAwesomeIcon size="lg" icon={faInfinity} />
           ),
-      });
+          formattedTraffic:
+            usedTraffic !== 0 ? formatTraffic(usedTraffic) : "0 MB",
+          totalTraffic:
+            dataLimit !== null ? formatTraffic(dataLimit) : "نامحدود",
+          remainingTraffic:
+            dataLimit !== null && dataLimit !== undefined ? (
+              dataLimit - (usedTraffic ?? 0) < 0 ? (
+                "منفی"
+              ) : (
+                formatTraffic(dataLimit - (usedTraffic ?? 0))
+              )
+            ) : (
+              <FontAwesomeIcon size="lg" icon={faInfinity} />
+            ),
+        });
+      } else {
+        const {
+          online_at: onlineAt,
+          created_at: createdAt,
+          expire_date: expire,
+          used_traffic: usedTraffic,
+          data_limit: dataLimit,
+        } = data;
+
+        setServiceInfo({
+          formattedDate: onlineAt ? formatDate(onlineAt) : "نامشخص",
+          createdDate: createdAt ? formatDate(createdAt) : "نامشخص",
+          formattedExpireDate: expire ? formatExpireDate(expire) : "نامحدود",
+          remainingTime: expire ? (
+            calculateRemainingTime(expire)
+          ) : (
+            <FontAwesomeIcon size="lg" icon={faInfinity} />
+          ),
+          formattedTraffic:
+            usedTraffic !== 0 ? formatTraffic(usedTraffic) : "0 MB",
+          totalTraffic:
+            dataLimit !== null ? formatTraffic(dataLimit) : "نامحدود",
+          remainingTraffic:
+            dataLimit !== null && dataLimit !== undefined ? (
+              dataLimit - (usedTraffic ?? 0) < 0 ? (
+                "منفی"
+              ) : (
+                formatTraffic(dataLimit - (usedTraffic ?? 0))
+              )
+            ) : (
+              <FontAwesomeIcon size="lg" icon={faInfinity} />
+            ),
+        });
+      }
     }
-  }, [data]);
+  }, [data, isMarzban]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
+  const handleShow = () => setShow(true);
 
   const {
     formattedDate,
@@ -206,7 +263,7 @@ const ServiceInfo = ({ data }) => {
             className="img-fluid"
             value={SubUrl}
             cursor={"pointer"}
-            onClick={() => handleCopyToClipboard(SubUrl)}
+            onClick={(e) => handleCopyToClipboard(SubUrl, e)}
           />
         </Modal.Body>
       </Modal>

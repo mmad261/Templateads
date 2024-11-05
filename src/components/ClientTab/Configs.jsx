@@ -11,28 +11,45 @@ import {
   extractNameFromConfigURL,
   handleCopyToClipboard,
 } from "../../utils/Helper.js";
+import GetInfoRequest from "../../utils/GetInfoRequest.js";
 
 const Configs = ({ data }) => {
-  
-  const filteredLinks = useMemo(() => {
-    if (data?.links && data.links[data.links.length - 1] === "False") {
-      return data.links.slice(0, -1);
+  const [dataLinks, setDataLinks] = useState([]);
+
+  useEffect(() => {
+    if (data?.links) {
+      // Use links directly if available
+      const links =
+        data.links[data.links.length - 1] === "False"
+          ? data.links.slice(0, -1)
+          : data.links;
+      setDataLinks(links);
+    } else {
+      // Fetch and decode links if not provided in data
+      GetInfoRequest.getConfigs().then((res) => {
+        const decodedLinks = decodeBase64(res.data.trim());
+        const configArray = decodedLinks ? decodedLinks.split("\n") : [];
+        setDataLinks(
+          configArray[configArray.length - 1] === "False"
+            ? configArray.slice(0, -1)
+            : configArray
+        );
+      });
     }
-    return data?.links || [];
   }, [data?.links]);
 
   const [icons, setIcons] = useState([]);
   const [iconClasses, setIconClasses] = useState([]);
 
   useEffect(() => {
-    if (filteredLinks) {
-      setIcons(filteredLinks.map(() => faClipboard));
-      setIconClasses(filteredLinks.map(() => "icon-copy"));
+    if (dataLinks) {
+      setIcons(dataLinks.map(() => faClipboard));
+      setIconClasses(dataLinks.map(() => "icon-copy"));
     }
-  }, [filteredLinks]);
+  }, [dataLinks]);
 
   const [show, setShow] = useState(false);
-  const [modalTitle, setModalTitle] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
   const [link, setLink] = useState("");
   const [index, setIndex] = useState(null);
 
@@ -52,7 +69,7 @@ const Configs = ({ data }) => {
     <>
       <ListGroup className="nav-links">
         <ListGroup.Item
-          key={-1}
+          key={-2}
           value={SubUrl}
           onClick={() =>
             handleCopyToClipboard(SubUrl, -2, setIcons, setIconClasses)
@@ -79,19 +96,14 @@ const Configs = ({ data }) => {
             />
           </div>
         </ListGroup.Item>
-        {filteredLinks?.map((link, index) => {
+        {dataLinks?.map((link, index) => {
           const title = extractNameFromConfigURL(link);
           return (
             <ListGroup.Item
               key={index}
-              value={filteredLinks?.[index]}
+              value={link}
               onClick={() =>
-                handleCopyToClipboard(
-                  filteredLinks?.[index],
-                  index,
-                  setIcons,
-                  setIconClasses
-                )
+                handleCopyToClipboard(link, index, setIcons, setIconClasses)
               }
             >
               <div className="title-a">{title}</div>
@@ -103,7 +115,7 @@ const Configs = ({ data }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleCopyToClipboard(
-                      filteredLinks?.[index],
+                      link,
                       index,
                       setIcons,
                       setIconClasses
@@ -115,7 +127,7 @@ const Configs = ({ data }) => {
                   icon={faQrcode}
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleShow(title, filteredLinks?.[index], index);
+                    handleShow(title, link, index);
                   }}
                 />
               </div>
@@ -125,7 +137,7 @@ const Configs = ({ data }) => {
         <Button
           onClick={() =>
             handleCopyToClipboard(
-              filteredLinks.join("\n"),
+              dataLinks.join("\n"),
               -1,
               setIcons,
               setIconClasses
@@ -161,3 +173,13 @@ const Configs = ({ data }) => {
 };
 
 export default Configs;
+
+function decodeBase64(encodedString) {
+  try {
+    const decodedString = atob(encodedString);
+    return decodedString;
+  } catch (error) {
+    console.error("Failed to decode base64:", error);
+    return "";
+  }
+}
