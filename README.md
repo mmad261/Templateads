@@ -185,12 +185,15 @@ To update the template, simply repeat Step 1 from the installation guide.
 ---
 
 ## Customization
-To customize the app list or update application links:
-- **Repository**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
+To customize the app list or support List:
+- **Apps List**: [public-assets Apps JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
 - **Instructions**: Fork the repository if needed, add applications based on the operating system, provide custom icons, or update the program links.
+- **Support List**: [public-assets Socials JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/social.json)
+- **Instructions**: Fork the repository if needed, add Social logo and name and your contact_link
 
 **Video Tutorial**:  
 [![YouTube Tutorial Video](https://img.youtube.com/vi/l5Pvy6Hof9o/0.jpg)](https://www.youtube.com/watch?v=l5Pvy6Hof9o)
+[![YouTube Tutorial Video #2](https://img.youtube.com/vi/6s8931r9E24/0.jpg)](https://youtu.be/6s8931r9E24)
 
 ---
 
