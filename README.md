@@ -82,8 +82,8 @@
 
 ## شخصی ساطی
 برای شخصی سازی لیست اپلیکیشن ها یا بروزرسانی لینک یا عکسشون:
-- **اپلیکیشن ها**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
-- **لیست پشتیبانی**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/social.json)
+- **اپلیکیشن ها**: [public-assets Apps JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
+- **لیست پشتیبانی**: [public-assets Socials JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/social.json)
 - **توضیحات**: ریپازیتوری من رو فورک کنید. و باتوجه به ساختار اون لینک یا اسم یا عکسش رو تغییر بدید
 
 **ویدیو آموزشی**:  
