@@ -45,7 +45,7 @@
    SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
    ```
 
-3. **Restart Marzban:**
+3. **ریستارت کردن مرزبان:**
    ```sh
    marzban restart
    ```
@@ -82,11 +82,13 @@
 
 ## شخصی ساطی
 برای شخصی سازی لیست اپلیکیشن ها یا بروزرسانی لینک یا عکسشون:
-- **ریپو**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
+- **اپلیکیشن ها**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
+- **لیست پشتیبانی**: [public-assets JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/social.json)
 - **توضیحات**: ریپازیتوری من رو فورک کنید. و باتوجه به ساختار اون لینک یا اسم یا عکسش رو تغییر بدید
 
 **ویدیو آموزشی**:  
 [![YouTube Tutorial Video](https://img.youtube.com/vi/l5Pvy6Hof9o/0.jpg)](https://www.youtube.com/watch?v=l5Pvy6Hof9o)
+[![YouTube Tutorial Video #2](https://img.youtube.com/vi/6s8931r9E24/0.jpg)](https://youtu.be/6s8931r9E24)
 
 ---
 
