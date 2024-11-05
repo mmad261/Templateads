@@ -1,10 +1,12 @@
 # قالب اخنصاصی مرزبان و مرزنشین | MarzViteTemplate
 
 ## Desktop View
-<img src="https://raw.githubusercontent.com/MatinDehghanian/MarzViteTemplate/assets/images/desktop.png" title="Marzneshin-Sub-Desktop"/>
+![image](https://github.com/user-attachments/assets/b85a9158-8a77-44ba-92c3-297a13ac2c72)
+
 
 ## Responsive Mobile View
-<img src="https://raw.githubusercontent.com/MatinDehghanian/MarzViteTemplate/assets/images/web-Mobile.JPEG" title="Marzneshin-Sub-Mobile"/>
+![image](https://github.com/user-attachments/assets/a5ab91e0-71d3-4f5c-8f87-38e3824d8303)
+
 
 ---
 
@@ -105,10 +107,11 @@
 # MarzViteTemplate
 
 ## Desktop View
-<img src="https://raw.githubusercontent.com/MatinDehghanian/MarzViteTemplate/assets/images/desktop.png" title="Marzneshin-Sub-Desktop"/>
+![image](https://github.com/user-attachments/assets/b85a9158-8a77-44ba-92c3-297a13ac2c72)
+
 
 ## Responsive Mobile View
-<img src="https://raw.githubusercontent.com/MatinDehghanian/MarzViteTemplate/assets/images/web-Mobile.JPEG" title="Marzneshin-Sub-Mobile"/>
+![image](https://github.com/user-attachments/assets/a5ab91e0-71d3-4f5c-8f87-38e3824d8303)
 
 ---
 
