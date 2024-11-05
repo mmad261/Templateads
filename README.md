@@ -29,12 +29,12 @@
 
 ### مرزبان
 
-1. **قالب رو دانلود کنید:**
+1. **قالب رو با دستور زیر دانلود کنید**
    ```sh
    sudo wget -N -P /var/lib/marzban/templates/subscription/ https://github.com/MatinDehghanian/MarzViteTemplate/releases/download/v.1.1/index.html
    ```
 
-2. **دستورات زیر رو تو ترمینال سرورتون بزنید:**
+2. **دستورات زیر رو تو ترمینال سرورتون بزنید**
    ```sh
    echo 'CUSTOM_TEMPLATES_DIRECTORY="/var/lib/marzban/templates/"' | sudo tee -a /opt/marzban/.env
    echo 'SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"' | sudo tee -a /opt/marzban/.env
@@ -45,19 +45,19 @@
    SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
    ```
 
-3. **ریستارت کردن مرزبان:**
+3. **ریستارت کردن مرزبان**
    ```sh
    marzban restart
    ```
 
 ### مرزنشین
 
-1. **قالب رو دانلود کنید:**
+1. **قالب رو با دستور زیر دانلود کنید**
    ```sh
    sudo wget -N -P /var/lib/marzneshin/templates/subscription/ https://github.com/MatinDehghanian/MarzViteTemplate/releases/download/v.1.1/index.html
    ```
 
-2. **دستورات زیر رو تو ترمینال سرورتون بزنید:**
+2. **دستورات زیر رو تو ترمینال سرورتون بزنید**
    ```sh
    echo 'CUSTOM_TEMPLATES_DIRECTORY="/var/lib/marzneshin/templates/"' | sudo tee -a /etc/opt/marzneshin/.env
    echo 'SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"' | sudo tee -a /etc/opt/marzneshin/.env
@@ -68,7 +68,7 @@
    SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
    ```
 
-3. **ریستارت کردن مرزنشین:**
+3. **ریستارت کردن مرزنشین**
    ```sh
    marzneshin restart
    ```
@@ -80,8 +80,8 @@
 
 ---
 
-## شخصی ساطی
-برای شخصی سازی لیست اپلیکیشن ها یا بروزرسانی لینک یا عکسشون:
+## شخصی سازی
+برای شخصی سازی لیست اپلیکیشن ها و لیست پشتیبانی:
 - **اپلیکیشن ها**: [public-assets Apps JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/apps.json)
 - **لیست پشتیبانی**: [public-assets Socials JSON](https://github.com/MatinDehghanian/public-assets/blob/main/json/social.json)
 - **توضیحات**: ریپازیتوری من رو فورک کنید. و باتوجه به ساختار اون لینک یا اسم یا عکسش رو تغییر بدید
