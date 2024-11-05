@@ -5,6 +5,7 @@ import Configs from "./ClientTab/Configs";
 import AddConfigs from "./ClientTab/AddConfigs";
 import Apps from "./ClientTab/Apps";
 import { Link } from "react-router-dom";
+import Support from "./ClientTab/Support";
 
 const Client = ({ data }) => {
   const params = window.location.hash || "#addConfigs";
@@ -13,6 +14,7 @@ const Client = ({ data }) => {
     { key: "#configs", label: "لینک ها", Component: Configs },
     { key: "#addConfigs", label: "افزودن سابسکریبشن", Component: AddConfigs },
     { key: "#apps", label: "برنامه ها", Component: Apps },
+    { key: "#support", label: "پشتیبانی", Component: Support },
   ];
 
   return (
